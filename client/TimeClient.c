@@ -1,11 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
+#include <string.h>
 
 #define	MAXLINE		4096
-
-
 
 int main(int argc, char **argv) {
     int sockfd, n;
@@ -21,17 +21,16 @@ int main(int argc, char **argv) {
     
     if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
-        /* code */
         perror("socket error!");
         exit(1);
     }
     
-    bzero(&serveraddr, sizeof(serveraddr));
+    memset(&serveraddr, 0, sizeof(serveraddr));
     serveraddr.sin_family = AF_INET;
     serveraddr.sin_port = htons(13);
     if (inet_pton(AF_INET, argv[1], &serveraddr.sin_addr) <= 0)
     {
-        fprintf("inet_pton error for %s", argv[1]);
+        printf("inet_pton error for %s", argv[1]);
         exit(1);
     }
     
@@ -56,6 +55,8 @@ int main(int argc, char **argv) {
         perror("read error");
         exit(1);
     }
+    
+    close(sockfd);
     
     exit(0);
 }

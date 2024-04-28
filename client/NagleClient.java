@@ -8,6 +8,10 @@ import java.util.concurrent.TimeUnit;
 
 public class NagleClient {
 
+    private static final String HOST = "";
+    
+    private static final int PORT = 9999;
+
     public static void main(String[] args) throws Exception {
         Socket socket = new Socket();
         socket.setTcpNoDelay(true);
