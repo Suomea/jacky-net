@@ -5,3 +5,6 @@ target/
 rebel.xml
 logs/*
 out/
+*.class
+*.out
+.vscode/
